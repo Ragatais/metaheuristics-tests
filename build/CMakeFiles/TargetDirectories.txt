@@ -1,0 +1,3 @@
+C:/Users/magda/Metaheurystyki/metaheuristics-tests/build/CMakeFiles/projekt-lab0-cvrp.dir
+C:/Users/magda/Metaheurystyki/metaheuristics-tests/build/CMakeFiles/edit_cache.dir
+C:/Users/magda/Metaheurystyki/metaheuristics-tests/build/CMakeFiles/rebuild_cache.dir

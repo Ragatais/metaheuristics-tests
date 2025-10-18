@@ -1,0 +1,30 @@
+inicjalizacja w ea: losowa
+
+todo:
+-implementacja innej metaheurystyki do porównania z EA
+
+done:
+-zapisywanie w csv
+-losowy ma sie wykonywac 100 x 100 razy
+-zachlanny uruchomien tyle co miast
+
+tabelka:
+best|worst|avg|std
+
+do tabeli wykorzystujemy 10-krotny przebieg ea.
+a do wykresu? tez 10 przebiegów czy jeden? chyba 1
+
+        EAParams P;
+        P.pop_size = 100;
+        P.generations = 100;
+        P.Px = 0.7;
+        P.Pm = 0.1;
+        P.tournament = 5;
+        P.elitism = 1;
+
+        jaki typ:
+        krzyzowania? OX (Ordered Crossover) -> 1 potome
+        mutacji? inversion
+        selekcji? turniej rozmiar 5
+
+        zwiekszamy prawodpodobiensto mutacji.

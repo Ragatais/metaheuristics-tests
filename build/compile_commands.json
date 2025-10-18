@@ -1,0 +1,20 @@
+[
+{
+  "directory": "C:/Users/magda/Metaheurystyki/metaheuristics-tests/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/projekt-lab0-cvrp.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\projekt-lab0-cvrp.dir\\src\\cvrp_loader.cpp.obj -c C:\\Users\\magda\\Metaheurystyki\\metaheuristics-tests\\src\\cvrp_loader.cpp",
+  "file": "C:/Users/magda/Metaheurystyki/metaheuristics-tests/src/cvrp_loader.cpp",
+  "output": "CMakeFiles/projekt-lab0-cvrp.dir/src/cvrp_loader.cpp.obj"
+},
+{
+  "directory": "C:/Users/magda/Metaheurystyki/metaheuristics-tests/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/projekt-lab0-cvrp.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\projekt-lab0-cvrp.dir\\src\\main.cpp.obj -c C:\\Users\\magda\\Metaheurystyki\\metaheuristics-tests\\src\\main.cpp",
+  "file": "C:/Users/magda/Metaheurystyki/metaheuristics-tests/src/main.cpp",
+  "output": "CMakeFiles/projekt-lab0-cvrp.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/magda/Metaheurystyki/metaheuristics-tests/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/projekt-lab0-cvrp.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\projekt-lab0-cvrp.dir\\src\\random_cvrp_solution.cpp.obj -c C:\\Users\\magda\\Metaheurystyki\\metaheuristics-tests\\src\\random_cvrp_solution.cpp",
+  "file": "C:/Users/magda/Metaheurystyki/metaheuristics-tests/src/random_cvrp_solution.cpp",
+  "output": "CMakeFiles/projekt-lab0-cvrp.dir/src/random_cvrp_solution.cpp.obj"
+}
+]

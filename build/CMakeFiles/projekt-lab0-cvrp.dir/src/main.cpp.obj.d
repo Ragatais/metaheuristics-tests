@@ -434,6 +434,8 @@ CMakeFiles/projekt-lab0-cvrp.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h \
  C:/msys64/mingw64/include/c++/15.2.0/array \
  C:/msys64/mingw64/include/c++/15.2.0/compare \
+ C:/msys64/mingw64/include/c++/15.2.0/unordered_set \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/unordered_set.h \
  C:/Users/magda/Metaheurystyki/metaheuristics-tests/include/greedy.hpp \
  C:/Users/magda/Metaheurystyki/metaheuristics-tests/include/ea_logger.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/fstream \
@@ -466,4 +468,6 @@ CMakeFiles/projekt-lab0-cvrp.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/unique_ptr.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_dir.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_ops.h \
- C:/Users/magda/Metaheurystyki/metaheuristics-tests/include/csv_logger.hpp
+ C:/Users/magda/Metaheurystyki/metaheuristics-tests/include/tabu.hpp \
+ C:/Users/magda/Metaheurystyki/metaheuristics-tests/include/csv_logger.hpp \
+ C:/Users/magda/Metaheurystyki/metaheuristics-tests/include/tabu_logger.hpp

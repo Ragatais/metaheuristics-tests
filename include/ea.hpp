@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <limits>
 #include <functional>
+#include <unordered_set>
 #include "cvrp.hpp"
 #include "greedy.hpp"   // greedy_split (split permutacji w trasy)
 #include "fitness.hpp"  
@@ -54,6 +55,41 @@ inline int tournament_select(const std::vector<double>& fit, int k, std::mt19937
     }
     return best;
 }
+/*
+//PMX
+inline std::vector<int> crossover_PMX(const std::vector<int>& A, const std::vector<int>& B, std::mt19937& g) {
+    int n = (int)A.size();
+    if (n < 2) return A;
+    std::uniform_int_distribution<int> dist(0, n - 1);
+    int l = dist(g), r = dist(g);
+    if (l > r) std::swap(l, r);
+
+    std::vector<int> child(n, -1);
+    std::unordered_set<int> used;
+
+    // kopiuowanie segmentu A[l..r]
+    for (int i = l; i <= r; ++i) {
+        child[i] = A[i];
+        used.insert(A[i]);
+    }
+
+    // uzupełnianie z B z mapowaniem ID
+    for (int i = 0; i < n; ++i) {
+        if (child[i] == -1) {
+            int val = B[i];
+            while (used.count(val)) {
+                auto it = std::find(A.begin() + l, A.begin() + r + 1, val);
+                if (it == A.end()) break;
+                val = B[std::distance(A.begin(), it)];
+            }
+            child[i] = val;
+            used.insert(val);
+        }
+    }
+    return child;
+}
+*/
+
 
 // krzyżowanie: OX (Ordered Crossover) -> 1 potomek
 inline std::vector<int> crossover_OX(const std::vector<int>& A, const std::vector<int>& B, std::mt19937& g) {
@@ -76,6 +112,27 @@ inline std::vector<int> crossover_OX(const std::vector<int>& A, const std::vecto
     return child;
 }
 
+/*
+// mutacja: SWAP PER-GEN 
+// dla każdej pozycji i: z prawd. Pm zamień ord[i] z losowo wybraną inną pozycją
+inline void mutate_swap_per_gene(std::vector<int>& ord, double Pm, std::mt19937& g) {
+    const size_t n = ord.size();
+    if (n < 2 || Pm <= 0.0) return;
+
+    std::bernoulli_distribution flip(std::clamp(Pm, 0.0, 1.0));
+    std::uniform_int_distribution<size_t> partner_base(0, n - 2);
+
+    for (size_t i = 0; i < n; ++i) {
+        if (!flip(g)) continue;
+
+        size_t r = partner_base(g);
+        size_t j = (r >= i) ? r + 1 : r; 
+        std::swap(ord[i], ord[j]);
+    }
+}
+*/
+
+
 // mutacja: inversion
 inline void mutate_inversion(std::vector<int>& ord, std::mt19937& g) {
     if (ord.size() < 2) return;
@@ -84,6 +141,7 @@ inline void mutate_inversion(std::vector<int>& ord, std::mt19937& g) {
     if (i > j) std::swap(i, j);
     std::reverse(ord.begin()+i, ord.begin()+j+1);
 }
+
 
 // główna pętla EA — zwraca najlepsze rozwiązanie podzielone na traasy
 inline CVRPSolution run_EA(const CVRPInstance& I, const EAParams& P, const std::string& log_path = "") {
@@ -135,16 +193,32 @@ inline CVRPSolution run_EA(const CVRPInstance& I, const EAParams& P, const std::
         while ((int)next.size() < P.pop_size) {
             int p1 = tournament_select(fit, std::max(1, P.tournament), g);
             int p2 = tournament_select(fit, std::max(1, P.tournament), g);
+            /*
+            // pmx crossover
+            std::vector<int> child = (ur(g) < P.Px)
+                ? crossover_PMX(pop[p1], pop[p2], g)
+                : pop[p1];
+            */
 
+            //OX
             std::vector<int> child = (ur(g) < P.Px)
                 ? crossover_OX(pop[p1], pop[p2], g)
                 : pop[p1];
+            
+            /*    
+            // swap jest per-gen
+            mutate_swap_per_gene(child, P.Pm, g);
 
+            next.push_back(std::move(child));
+            */
+            
+            //inwersja
             if (ur(g) < P.Pm) {
                 mutate_inversion(child, g);
             }
-
+            
             next.push_back(std::move(child));
+            
         }
 
         pop.swap(next);

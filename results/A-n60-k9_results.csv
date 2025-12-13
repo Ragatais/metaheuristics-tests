@@ -1,0 +1,2 @@
+instance,rand_best,rand_worst,rand_avg,rand_std,rand_runs,greedy_best,greedy_worst,greedy_avg,greedy_std,greedy_runs,ea_best,ea_worst,ea_avg,ea_std,ea_runs,ts_best,ts_worst,ts_avg,ts_std,ts_runs
+A-n60-k9,2973.1,4354.85,3698.74,179.248,30000,1686.52,1972.17,1852.75,68.7713,59,1579.54,1756.15,1667.35,65.8751,10,2779.64,3114.8,2963.84,103.264,10

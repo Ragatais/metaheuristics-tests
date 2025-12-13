@@ -7,6 +7,8 @@
 #include "fitness.hpp"
 #include "stats.hpp"
 #include "ea.hpp"
+#include "tabu.hpp"
+
 
 // random uruchomia sie N razy (N = generations * pop_size)
 inline Stats run_random_experiment(const CVRPInstance& I, int runs, unsigned seed = std::random_device{}()) {
@@ -63,6 +65,43 @@ inline EAExperimentResult run_ea_repeated(const CVRPInstance& I, const EAParams&
     }
 
     EAExperimentResult result;
+    result.stats = compute_stats(vals);
+    result.best_solution = best_solution;
+    result.best_run_index = best_run;
+    return result;
+}
+
+// new added: Tabu search 
+struct TSExperimentResult {
+    Stats stats;
+    CVRPSolution best_solution;
+    int best_run_index = 1;
+};
+
+// uruchamianie ts r razy zeby porownac z ea
+inline TSExperimentResult run_tabu_repeated(const CVRPInstance& I, const TSParams& P, int repeats) {
+    std::vector<double> vals;
+    vals.reserve(repeats);
+
+    CVRPSolution best_solution;
+    double best_cost = std::numeric_limits<double>::infinity();
+    int best_run = 1;
+
+    for (int r = 0; r < repeats; ++r) {
+        TSParams P2 = P;
+        P2.seed = P.seed + r;  // różne seedy
+        CVRPSolution candidate = run_tabu(I, P2);  // pojedynczy run
+        double cost = fitness_cvrp(I, candidate);
+        vals.push_back(cost);
+
+        if (cost < best_cost) {
+            best_cost = cost;
+            best_solution = candidate;
+            best_run = r + 1;
+        }
+    }
+
+    TSExperimentResult result;
     result.stats = compute_stats(vals);
     result.best_solution = best_solution;
     result.best_run_index = best_run;
